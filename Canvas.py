@@ -39,11 +39,11 @@ def draw_square_with_white_border(image, center, size, color, border_thickness):
 
 # Here is code for Canvas setup
 paintWindow = np.zeros((471,636,3)) + 0
-paintWindow= cv2.rectangle(paintWindow, (70 - 40, 50 - 40), (70 + 40, 50 + 40), (255, 255, 255), -1)
-paintWindow = cv2.rectangle(paintWindow, (200 - 40, 50 - 40), (200 + 40, 50 + 40), (255, 0, 0), -1)
-paintWindow = cv2.rectangle(paintWindow, (330 - 40, 50 - 40), (330 + 40, 50 + 40), (0, 255, 0), -1)
-paintWindow = cv2.rectangle(paintWindow, (460 - 40, 50 - 40), (460 + 40, 50 + 40), (0, 0, 255), -1)
-paintWindow = cv2.rectangle(paintWindow, (585 - 40, 50 - 40), (585 + 40, 50 + 40), (0, 255, 255), -1)
+paintWindow= cv2.rectangle(paintWindow, (30, 10), (110, 90), (255, 255, 255), -1)
+paintWindow = cv2.rectangle(paintWindow, (160, 10), (240, 90), (255, 0, 0), -1)
+paintWindow = cv2.rectangle(paintWindow, (290, 10), (370 , 90), (0, 255, 0), -1)
+paintWindow = cv2.rectangle(paintWindow, (420 , 10 ), (500, 90), (0, 0, 255), -1)
+paintWindow = cv2.rectangle(paintWindow, (545, 10), (665, 90), (0, 255, 255), -1)
 
 
 draw_square_with_white_border(paintWindow, (70, 50), 80, (255, 255, 255), 3)
@@ -80,11 +80,11 @@ while ret:
     #hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
     framergb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
-    frame = cv2.rectangle(frame, (70 - 40, 50 - 40), (70 + 40, 50 + 40), (255, 255, 255), -1)
-    frame = cv2.rectangle(frame, (200 - 40, 50 - 40), (200 + 40, 50 + 40), (255, 0, 0), -1)
-    frame = cv2.rectangle(frame, (330 - 40, 50 - 40), (330 + 40, 50 + 40), (0, 255, 0), -1)
-    frame = cv2.rectangle(frame, (460 - 40, 50 - 40), (460 + 40, 50 + 40), (0, 0, 255), -1)
-    frame = cv2.rectangle(frame, (585 - 40, 50 - 40), (585 + 40, 50 + 40), (0, 255, 255), -1)
+    frame = cv2.rectangle(frame, (30, 10), (110, 90), (255, 255, 255), -1)
+    frame = cv2.rectangle(frame, (160, 10), (240, 90), (255, 0, 0), -1)
+    frame = cv2.rectangle(frame, (290, 10), (370 , 90), (0, 255, 0), -1)
+    frame = cv2.rectangle(frame, (420 , 10 ), (500, 90), (0, 0, 255), -1)
+    frame = cv2.rectangle(frame, (545, 10), (665 , 90), (0, 255, 255), -1)
 
     draw_square_with_white_border(frame, (70, 50), 80, (255, 255, 255), 3)
     draw_square_with_white_border(frame, (200, 50), 80, (255, 0, 0), 3)
@@ -133,8 +133,8 @@ while ret:
             ypoints.append(deque(maxlen=512))
             yellow_index += 1
 
-        elif center[1] <= 100:
-            if 0 <= center[0] <= 80: # Clear Button
+        elif center[1] <= 90:
+            if 30 <= center[0] <= 110: # Clear Button
                 bpoints = [deque(maxlen=512)]
                 gpoints = [deque(maxlen=512)]
                 rpoints = [deque(maxlen=512)]
@@ -146,13 +146,13 @@ while ret:
                 yellow_index = 0
 
                 paintWindow[100:,:,:] = 0
-            elif 120<= center[0] <= 160:
+            elif 160<= center[0] <= 240:
                     colorIndex = 0 # Blue
-            elif 190 <= center[0] <= 270:
+            elif 290 <= center[0] <= 370:
                     colorIndex = 1 # Green
-            elif  360<= center[0] <= 440:
+            elif 420<= center[0] <= 500:
                     colorIndex = 2 # Red
-            elif 495 <= center[0] <= 575:
+            elif 545 <= center[0] <= 665:
                     colorIndex = 3 # Yellow
         else :
             if colorIndex == 0:
