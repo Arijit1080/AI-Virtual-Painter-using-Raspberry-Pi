@@ -43,7 +43,7 @@ paintWindow= cv2.rectangle(paintWindow, (30, 10), (110, 90), (255, 255, 255), -1
 paintWindow = cv2.rectangle(paintWindow, (160, 10), (240, 90), (255, 0, 0), -1)
 paintWindow = cv2.rectangle(paintWindow, (290, 10), (370 , 90), (0, 255, 0), -1)
 paintWindow = cv2.rectangle(paintWindow, (420 , 10 ), (500, 90), (0, 0, 255), -1)
-paintWindow = cv2.rectangle(paintWindow, (545, 10), (665, 90), (0, 255, 255), -1)
+paintWindow = cv2.rectangle(paintWindow, (545, 10), (625, 90), (0, 255, 255), -1)
 
 
 draw_square_with_white_border(paintWindow, (70, 50), 80, (255, 255, 255), 3)
@@ -84,7 +84,7 @@ while ret:
     frame = cv2.rectangle(frame, (160, 10), (240, 90), (255, 0, 0), -1)
     frame = cv2.rectangle(frame, (290, 10), (370 , 90), (0, 255, 0), -1)
     frame = cv2.rectangle(frame, (420 , 10 ), (500, 90), (0, 0, 255), -1)
-    frame = cv2.rectangle(frame, (545, 10), (665 , 90), (0, 255, 255), -1)
+    frame = cv2.rectangle(frame, (545, 10), (625 , 90), (0, 255, 255), -1)
 
     draw_square_with_white_border(frame, (70, 50), 80, (255, 255, 255), 3)
     draw_square_with_white_border(frame, (200, 50), 80, (255, 0, 0), 3)
