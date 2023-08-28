@@ -18,7 +18,7 @@ green_index = 0
 red_index = 0
 yellow_index = 0
 
-#The kernel to be used for dilation purpose 
+#The kernel to be used for dilation purpose
 kernel = np.ones((5,5),np.uint8)
 
 colors = [(255, 0, 0), (0, 255, 0), (0, 0, 255), (0, 255, 255)]
@@ -35,29 +35,6 @@ def draw_square_with_white_border(image, center, size, color, border_thickness):
     border_color = (255, 255, 255)
     cv2.rectangle(image, (x - half_size - border_thickness, y - half_size - border_thickness),
                   (x + half_size + border_thickness, y + half_size + border_thickness), border_color, border_thickness)
-
-
-# Here is code for Canvas setup
-paintWindow = np.zeros((471,636,3)) + 0
-paintWindow= cv2.rectangle(paintWindow, (30, 10), (110, 90), (255, 255, 255), -1)
-paintWindow = cv2.rectangle(paintWindow, (160, 10), (240, 90), (255, 0, 0), -1)
-paintWindow = cv2.rectangle(paintWindow, (290, 10), (370 , 90), (0, 255, 0), -1)
-paintWindow = cv2.rectangle(paintWindow, (420 , 10 ), (500, 90), (0, 0, 255), -1)
-paintWindow = cv2.rectangle(paintWindow, (545, 10), (625, 90), (0, 255, 255), -1)
-
-
-draw_square_with_white_border(paintWindow, (70, 50), 80, (255, 255, 255), 3)
-draw_square_with_white_border(paintWindow, (200, 50), 80, (255, 0, 0), 3)
-draw_square_with_white_border(paintWindow, (330, 50), 80, (0, 255, 0), 3)
-draw_square_with_white_border(paintWindow, (460, 50), 80, (0, 0, 255), 3)
-draw_square_with_white_border(paintWindow, (585, 50), 80, (0, 255, 255), 3)
-
-cv2.putText(paintWindow, "CLEAR", (45,50), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2, cv2.LINE_AA)
-cv2.putText(paintWindow, "BLUE", (175, 50), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2, cv2.LINE_AA)
-cv2.putText(paintWindow, "GREEN", (300, 50), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2, cv2.LINE_AA)
-cv2.putText(paintWindow, "RED", (440, 50), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2, cv2.LINE_AA)
-cv2.putText(paintWindow, "YELLOW", (555, 50), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0, 0), 2, cv2.LINE_AA)
-cv2.namedWindow('Paint', cv2.WINDOW_AUTOSIZE)
 
 
 # initialize mediapipe
@@ -79,6 +56,27 @@ while ret:
     frame = cv2.flip(frame, 1)
     #hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
     framergb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+
+    # Here is code for Canvas setup
+    paintWindow = np.zeros((x, y, 3)) + 0
+    paintWindow = cv2.rectangle(paintWindow, (30, 10), (110, 90), (255, 255, 255), -1)
+    paintWindow = cv2.rectangle(paintWindow, (160, 10), (240, 90), (255, 0, 0), -1)
+    paintWindow = cv2.rectangle(paintWindow, (290, 10), (370, 90), (0, 255, 0), -1)
+    paintWindow = cv2.rectangle(paintWindow, (420, 10), (500, 90), (0, 0, 255), -1)
+    paintWindow = cv2.rectangle(paintWindow, (545, 10), (625, 90), (0, 255, 255), -1)
+
+    draw_square_with_white_border(paintWindow, (70, 50), 80, (255, 255, 255), 3)
+    draw_square_with_white_border(paintWindow, (200, 50), 80, (255, 0, 0), 3)
+    draw_square_with_white_border(paintWindow, (330, 50), 80, (0, 255, 0), 3)
+    draw_square_with_white_border(paintWindow, (460, 50), 80, (0, 0, 255), 3)
+    draw_square_with_white_border(paintWindow, (585, 50), 80, (0, 255, 255), 3)
+
+    cv2.putText(paintWindow, "CLEAR", (45, 50), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2, cv2.LINE_AA)
+    cv2.putText(paintWindow, "BLUE", (175, 50), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2, cv2.LINE_AA)
+    cv2.putText(paintWindow, "GREEN", (300, 50), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2, cv2.LINE_AA)
+    cv2.putText(paintWindow, "RED", (440, 50), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2, cv2.LINE_AA)
+    cv2.putText(paintWindow, "YELLOW", (555, 50), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2, cv2.LINE_AA)
+    cv2.namedWindow('Paint', cv2.WINDOW_AUTOSIZE)
 
     frame = cv2.rectangle(frame, (30, 10), (110, 90), (255, 255, 255), -1)
     frame = cv2.rectangle(frame, (160, 10), (240, 90), (255, 0, 0), -1)
@@ -110,8 +108,8 @@ while ret:
                 # # print(id, lm)
                 # print(lm.x)
                 # print(lm.y)
-                lmx = int(lm.x * 640)
-                lmy = int(lm.y * 480)
+                lmx = int(lm.x * y)
+                lmy = int(lm.y * x)
 
                 landmarks.append([lmx, lmy])
 
@@ -189,7 +187,7 @@ while ret:
                 cv2.line(frame, points[i][j][k - 1], points[i][j][k], colors[i], 2)
                 cv2.line(paintWindow, points[i][j][k - 1], points[i][j][k], colors[i], 2)
 
-    cv2.imshow("Output", frame) 
+    cv2.imshow("Output", frame)
     cv2.imshow("Paint", paintWindow)
 
     if cv2.waitKey(1) == ord('q'):
